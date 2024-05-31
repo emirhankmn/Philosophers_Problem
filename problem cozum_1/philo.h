@@ -75,6 +75,7 @@ typedef struct s_data
 	pthread_mutex_t		*forks;//catallar
 	pthread_mutex_t		write;//yazma icin mutex
 	pthread_mutex_t		lock;//filozoflar icin kilit/erisim sinirlama icin mutex
+	pthread_mutex_t		died;//olum durumu icin mutex
 	t_philo				*philos;
 }	t_data;
 

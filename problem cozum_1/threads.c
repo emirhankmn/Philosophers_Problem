@@ -20,11 +20,17 @@ void	*monitor(void *data_pointer)//Yalnizca istedigimiz dongu sayisi kadar calis
 	pthread_mutex_lock(&philo->data->write);
 	printf("data val: %d\n", philo->data->dead);
 	pthread_mutex_unlock(&philo->data->write);
+	pthread_mutex_lock(&philo->data->died);
 	while (philo->data->dead == 0)//tum yemek yeme islemleri izlenir.
 	{
+		pthread_mutex_unlock(&philo->data->died);
 		pthread_mutex_lock(&philo->lock);//kilitlenince hic bir thread bu kisma mudahale edemez.
 		if (philo->data->finished >= philo->data->number_of_philosophers)//eger her filozof yeteri kadar yemek yemisse olum durumu varmis gibi davranilir ve donguden cikilir.
+		{
+			pthread_mutex_lock(&philo->data->died);
 			philo->data->dead = 1;
+			pthread_mutex_unlock(&philo->data->died);
+		}
 		pthread_mutex_unlock(&philo->lock);//kilit acilana kadar tabii ki.
 	}
 	return ((void *)0);
@@ -35,8 +41,10 @@ void	*supervisor(void *philo_pointer)
 	t_philo	*philo;
 
 	philo = (t_philo *) philo_pointer;
-	while (philo->data->dead == 0)// olen biri olana kadar dongu sonsuza kadar devam eder.
+	pthread_mutex_lock(&philo->data->died);
+	while (philo->data->  == 0)// olen biri olana kadar dongu sonsuza kadar devam eder.
 	{
+		pthread_mutex_unlock(&philo->data->died);
 		pthread_mutex_lock(&philo->lock);
 		if (get_time() >= philo->dead_time && philo->eating == 0)//eger filozoflardan biri olurse messages fonsiyonuna gidilir.
 			messages(DIED, philo);
@@ -60,8 +68,10 @@ void	*routine(void *philo_pointer)
 	philo->dead_time = philo->data->time_to_die + get_time();
 	if (pthread_create(&philo->t1, NULL, &supervisor, (void *)philo))//olum durumlarini takip edecek bir thread gerekiyor.
 		return ((void *)1);
+	pthread_mutex_lock(&philo->data->died);
 	while (philo->data->dead == 0)
 	{
+		pthread_mutex_unlock(&philo->data->died);
 		eat(philo);
 		messages(THINKING, philo);
 	}

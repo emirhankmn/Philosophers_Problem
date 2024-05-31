@@ -20,11 +20,11 @@ void	messages(char *str, t_philo *philo)
 	time = get_time() - philo->data->start_time;//baslangictan su an cikarilarak gecen zaman bulunur.
 	if (ft_strcmp(DIED, str) == 0 && philo->data->dead == 0)//eger olum durumu varsa girilir.
 	{
-		printf("%llu %d %s\n", time, philo->id, str);//string yazdirilir.
+		printf("%lu %d %s\n", time, philo->id, str);//string yazdirilir.
 		philo->data->dead = 1;//olum oldugu eklenir ve tum threadlardeki donguler sona erer.
 	}
 	if (!philo->data->dead)//olum yoksa ve dongu devam ediyorsa mesaj yazdirilir.
-		printf("%llu %d %s\n", time, philo->id, str);
+		printf("%lu %d %s\n", time, philo->id, str);
 	pthread_mutex_unlock(&philo->data->write);//yazmanin kilidi acilir.
 }
 

@@ -85,13 +85,12 @@ int	init_data(t_data *data, int ac, char **av)
 		data->must_to_eat = -1;
 	data->dead = 0;
 	data->finished = 0;
-	if (data->number_of_philosophers <= 0 || data->number_of_philosophers > 200
-		|| data->time_to_die < 0 || data->time_to_eat < 0
-		|| data->time_to_sleep < 0)
+	if (data->number_of_philosophers <= 0 || data->number_of_philosophers > 200)
 		return (printf("%s", ERRORMSG3), 0);
 	//POSIX standartlarına uygun olarak iş parçacıkları arasında eşzamanlılık (concurrency) kontrolü sağlamak için bir mutex (kilit) nesnesini başlatır.
 	pthread_mutex_init(&data->write, NULL);//yazma islemi icin bir mutex acmamiz gerek.
 	pthread_mutex_init(&data->lock, NULL);//philolarin erisimlerini sinirlandirmak icin bir mutex olusturmamiz gerek.
+	pthread_mutex_init(&data->died, NULL);//olum durumunu kontrol etmek icin bir mutex olusturmamiz gerek.
 	return (0);
 }
 
