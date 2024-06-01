@@ -72,24 +72,6 @@ void    create_philos(t_philo *philos, t_info *info)
     }
 }
 
-void    print_kill(t_philo philo, char *msg, int flag)
-{
-    if (flag)
-    {
-        pthread_mutex_lock(&philo.info->is_anyone_died_mutex);
-        philo.info->is_anyone_died = true;
-        pthread_mutex_unlock(&philo.info->is_anyone_died_mutex);
-    }
-    pthread_mutex_lock(&philo.info->is_anyone_died_mutex);
-    if ((philo.enought_meal == false && philo.info->is_anyone_died == false) || flag == 1)
-    {
-        pthread_mutex_lock(&philo.info->print_mutex);
-        printf("%ld %d %s\n", get_time() - philo.info->start_time, philo.id + 1, msg);
-        pthread_mutex_unlock(&philo.info->print_mutex);
-    }
-    pthread_mutex_unlock(&philo.info->is_anyone_died_mutex);
-}
-
 int  death_control(t_philo *philo, int flag)
 {
     if (flag == 1)

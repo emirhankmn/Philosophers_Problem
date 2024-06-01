@@ -64,5 +64,10 @@ int	                    ft_atoi(const char *str);
 time_t	                get_time(void);
 void                    print_kill(t_philo philo, char *msg, int flag);
 int                     death_control(t_philo *philo, int flag);
+void                    clean_up(pthread_t *monitor_thread, t_philo *philos);
+
+//init
+int                     init_info(t_info *info, int ac, char **av);
+int                     init_philos(t_philo *philos, t_info *info);
 
 #endif

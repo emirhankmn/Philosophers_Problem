@@ -2,7 +2,7 @@ NAME = philo
 
 CC = gcc
 
-CFLAGS = -Wall -Werror -Wextra -g -fsanitize=thread
+CFLAGS = -Wall -Werror -Wextra -g 
 
 Y = "\033[33m"
 R = "\033[31m"
@@ -13,7 +13,7 @@ UP = "\033[A"
 CUT = "\033[K"
 
 SRC_DIR = source
-SRC = $(SRC_DIR)/main.c $(SRC_DIR)/utils.c $(SRC_DIR)/actions.c
+SRC = $(SRC_DIR)/main.c $(SRC_DIR)/utils.c $(SRC_DIR)/actions.c $(SRC_DIR)/init.c
 
 OBJECTS = $(SRC:.c=.o)
 
