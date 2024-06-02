@@ -11,16 +11,17 @@
 /* ************************************************************************** */
 
 #include "../include/philo.h"
+#include <stdio.h>
 
-static void if_one_philo(t_info *info)
+static void	if_one_philo(t_info *info)
 {
-    printf("%d %d %s\n", 0, 1, TAKE_FORK);
-    senstive_usleep(info->time_to_die);
-    printf("%ld %d %s\n", info->time_to_die , 0, DIED);
-    free(info->forks);
+	printf("%d %d %s\n", 0, 1, TAKE_FORK);
+	senstive_usleep(info->time_to_die);
+	printf("%ld %d %s\n", info->time_to_die, 0, DIED);
+	free(info->forks);
 }
 
-static int check_args(int ac, char **av)
+static int	check_args(int ac, char **av)
 {
 	int	i;
 	int	q;
@@ -42,23 +43,24 @@ static int check_args(int ac, char **av)
 	return (0);
 }
 
-int main(int ac, char **av)
+int	main(int ac, char **av)
 {
-    t_philo *philos;
-    t_info info;
-    pthread_t monitor_thread;
+	t_philo			*philos;
+	t_info			info;
+	pthread_t		monitor_thread;
 
-    if (check_args(ac, av))
-        return (1);
-    if (!init_info(&info, ac, av))
-        return (1);
-    philos = (t_philo *)malloc(sizeof(t_philo) * info.number_of_philos);
-    if  (!philos)
-        return (0);
-    if (info.number_of_philos == 1)
-        return (if_one_philo(&info), free(philos), 0);
-    if (!init_philos(philos, &info) || pthread_create(&monitor_thread, NULL, &monitor, philos))
-        return (free(info.forks), free(philos), 0);
-    create_philos(philos, &info);
-    return (clean_up(&monitor_thread, philos), 0);
+	if (check_args(ac, av))
+		return (1);
+	if (!init_info(&info, ac, av))
+		return (1);
+	philos = (t_philo *)malloc(sizeof(t_philo) * info.number_of_philos);
+	if (!philos)
+		return (0);
+	if (info.number_of_philos == 1)
+		return (if_one_philo(&info), free(philos), 0);
+	if (!init_philos(philos, &info) || pthread_create(&monitor_thread, NULL,
+			&monitor, philos))
+		return (free(info.forks), free(philos), 0);
+	create_philos(philos, &info);
+	return (clean_up(&monitor_thread, philos), 0);
 }

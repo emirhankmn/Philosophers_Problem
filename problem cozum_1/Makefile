@@ -6,7 +6,7 @@
 #    By: eakman <eakman@student.42kocaeli.com.tr    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/18 16:54:14 by eakman            #+#    #+#              #
-#    Updated: 2024/02/18 19:32:04 by eakman           ###   ########.fr        #
+#    Updated: 2024/06/02 16:34:35 by eakman           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ NAME = philo
 
 CC = gcc
 
-CFLAGS = -Wall -Werror -Wextra -g -fsanitize=thread
+CFLAGS = -Wall -Werror -Wextra -g 
 
 Y = "\033[33m"
 R = "\033[31m"

@@ -6,7 +6,7 @@
 /*   By: eakman <eakman@student.42kocaeli.com.tr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 18:17:51 by eakman            #+#    #+#             */
-/*   Updated: 2024/02/18 21:33:45 by eakman           ###   ########.fr       */
+/*   Updated: 2024/06/02 14:14:41 by eakman           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,11 @@ void	messages(char *str, t_philo *philo)
 	time = get_time() - philo->data->start_time;//baslangictan su an cikarilarak gecen zaman bulunur.
 	if (ft_strcmp(DIED, str) == 0 && philo->data->dead == 0)//eger olum durumu varsa girilir.
 	{
-		printf("%lu %d %s\n", time, philo->id, str);//string yazdirilir.
+		printf("%llu %d %s\n", time, philo->id, str);//string yazdirilir.
 		philo->data->dead = 1;//olum oldugu eklenir ve tum threadlardeki donguler sona erer.
 	}
 	if (!philo->data->dead)//olum yoksa ve dongu devam ediyorsa mesaj yazdirilir.
-		printf("%lu %d %s\n", time, philo->id, str);
+		printf("%llu %d %s\n", time, philo->id, str);
 	pthread_mutex_unlock(&philo->data->write);//yazmanin kilidi acilir.
 }
 

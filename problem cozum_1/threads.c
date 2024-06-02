@@ -6,7 +6,7 @@
 /*   By: eakman <eakman@student.42kocaeli.com.tr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 18:07:40 by eakman            #+#    #+#             */
-/*   Updated: 2024/02/18 21:23:03 by eakman           ###   ########.fr       */
+/*   Updated: 2024/06/02 14:14:30 by eakman           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ void	*supervisor(void *philo_pointer)
 
 	philo = (t_philo *) philo_pointer;
 	pthread_mutex_lock(&philo->data->died);
-	while (philo->data->  == 0)// olen biri olana kadar dongu sonsuza kadar devam eder.
+	while (philo->data->dead == 0)// olen biri olana kadar dongu sonsuza kadar devam eder.
 	{
 		pthread_mutex_unlock(&philo->data->died);
 		pthread_mutex_lock(&philo->lock);
