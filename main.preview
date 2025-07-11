@@ -1,1 +1,17 @@
-deneme
+// Filozoflar problemi: Her filozof düşünür, yer ve bekler.
+// Mutex'lerle çatallar korunur, deadlock önlenir.
+
+void	*philo_routine(void *arg)
+{
+	t_philo *philo = (t_philo *)arg;
+
+	while (!is_simulation_over())
+	{
+		think(philo);
+		take_forks(philo);
+		eat(philo);
+		put_forks(philo);
+		sleep_philo(philo);
+	}
+	return (NULL);
+}
